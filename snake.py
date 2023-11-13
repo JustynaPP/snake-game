@@ -25,6 +25,13 @@ class Snake:
         self.snake_segm.append(snake)
         snake.setpos(position)
 
+    def reset_snake(self):
+        for segment in self.snake_segm:
+            segment.goto(1000, 1000)
+        self.snake_segm.clear()
+        self.create_snake()
+        self.head = self.snake_segm[0]
+
     def extend(self):
         self.add_segment(self.snake_segm[-1].position())  # position of the last segment in the list
 
@@ -33,7 +40,6 @@ class Snake:
             previous = self.snake_segm[seg_num - 1]
             self.snake_segm[seg_num].goto(previous.pos())
         self.head.fd(MOVE_SPEED)
-
 
     def up(self):
         if self.head.heading() != DOWN:
